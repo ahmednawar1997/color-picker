@@ -51,10 +51,32 @@ export const isDark = (color: any) => {
     return false;
 };
 
+export const hexToRgb = (hex: string) => {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        red: parseInt(result[1], 16),
+        green: parseInt(result[2], 16),
+        blue: parseInt(result[3], 16)
+    } : null;
+};
+
 export const generateColors = (num: number) => {
     const colors = [];
     for (let i = 0; i < num; i++) {
         colors.push(pickRandomColor());
     }
     return colors;
+};
+
+export const generateShades = (color: any, num: number) => {
+    const shades: Array<any> = [];
+    for (let i = 0; i < num; i++) {
+        const newShade = {
+            red: Math.floor(color.red * ((i + 1) / num)),
+            green: Math.floor(color.green * ((i + 1) / num)),
+            blue: Math.floor(color.blue * ((i + 1) / num))
+        };
+        shades.push(rgbToHex(newShade));
+    }
+    return shades;
 };

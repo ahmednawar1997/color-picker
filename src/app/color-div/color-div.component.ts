@@ -23,31 +23,37 @@ export class ColorDivComponent implements OnInit {
   colorDescription!: string;
   isDark!: boolean;
   isLocked = false;
+  showShades = false;
+  shades!: Array<any>;
 
   constructor(private elementRef: ElementRef) {
   }
 
   ngOnInit(): void {
-
-    this.colorDescription = colorService.getColorDescription(this.color);
-    this.colorRGB = colorService.generateRGBValue(this.color);
-    this.colorHex = colorService.rgbToHex(this.color);
-    this.isDark = colorService.isDark(this.color);
+    this.setupColor();
   }
 
 
   refreshColor = () => {
     if (!this.isLocked) {
       this.color = colorService.pickRandomColor();
-      this.colorDescription = colorService.getColorDescription(this.color);
-      this.colorRGB = colorService.generateRGBValue(this.color);
-      this.colorHex = colorService.rgbToHex(this.color);
-      this.isDark = colorService.isDark(this.color);
+      this.setupColor();
     }
+  }
+
+  private setupColor = () => {
+    this.colorDescription = colorService.getColorDescription(this.color);
+    this.colorRGB = colorService.generateRGBValue(this.color);
+    this.colorHex = colorService.rgbToHex(this.color);
+    this.isDark = colorService.isDark(this.color);
+    this.shades = colorService.generateShades(this.color, 20);
   }
 
   toggleLock = () => {
     this.isLocked = !this.isLocked;
+  }
+  toggleShades = () => {
+    this.showShades = !this.showShades;
   }
 
   removeColorFromParent = () => {
@@ -57,7 +63,11 @@ export class ColorDivComponent implements OnInit {
   addColorFromParent = () => {
     this.addColor.emit(this.color);
   }
-
+  setColor = (colorString: string) => {
+    this.color = colorService.hexToRgb(colorString) || this.color;
+    this.setupColor();
+    this.toggleShades();
+  }
 }
 
 
