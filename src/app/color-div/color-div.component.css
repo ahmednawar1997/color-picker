@@ -1,0 +1,76 @@
+:host {
+  display: flex;
+  flex: 1;
+
+}
+
+.color-cont {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  padding: 30px;
+  height: 100%;
+  transition: ease 0.3s;
+}
+
+.buttons-cont {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  transition: visibility 0s, opacity 0.5s linear;
+}
+
+.color-cont:hover>.buttons-cont>.color-button {
+  opacity: 1;
+}
+
+.color-description {
+  flex: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.color-button {
+  opacity: 0;
+
+  padding: 15px;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 400;
+  transition: ease-in 0.1s;
+}
+
+.locked {
+  opacity: 1;
+}
+
+.lightTheme .buttons-cont .color-button {
+  color: rgb(71, 55, 78);
+}
+
+.lightTheme .buttons-cont .color-button:hover {
+  color: rgb(41, 37, 43);
+}
+
+.darkTheme .buttons-cont .color-button {
+  color: #d2c9da;
+}
+
+.darkTheme .buttons-cont .color-button:hover {
+  color: rgb(255, 255, 255);
+}
+
+a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightTheme {
+  color: black;
+}

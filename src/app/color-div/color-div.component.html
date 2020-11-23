@@ -1,0 +1,17 @@
+<div class="color-cont" [style.background-color]="colorRGB" [ngClass]="{lightTheme:!isDark, darkTheme:isDark}">
+
+    <div class="buttons-cont">
+        <a class="color-button" (click)="removeColor()"><i class="fas fa-times fa-lg"></i></a>
+        <a class="color-button" [ngClass]="{'locked':isLocked}" (click)="toggleLock()"><i class="fas fa-lg"
+                [ngClass]="{'fa-lock':isLocked, 'fa-lock-open':!isLocked}"></i></a>
+        <a class="color-button" [cdkCopyToClipboard]="colorHex"><i class="fas fa-copy fa-lg"></i></a>
+        <a class="color-button" cdkDragHandle ><i class="fas fa-arrows-alt-h fa-lg"></i></a>
+
+    </div>
+
+    <div class="color-description">
+        <h2 class="color-header">{{colorHex}}</h2>
+        <div class="color-options">{{colorDescription}}</div>
+    </div>
+
+</div>

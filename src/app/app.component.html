@@ -1,0 +1,15 @@
+<app-navbar></app-navbar>
+<div class="body-container mt-1">
+  <div class="header-cont">
+    <div class="header-item">
+      <h1 class="text-center">Color Pallete</h1>
+    </div>
+    <div class="header-item">
+      <button class="button" (click)="refreshColors()">Refresh</button>
+    </div>
+  </div>
+  <div class="pallete-cont" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
+  <app-color-div *ngFor="let color of colors" [color]="color" cdkDrag cdkDragLockAxis="x"></app-color-div>
+
+</div>
+</div>
