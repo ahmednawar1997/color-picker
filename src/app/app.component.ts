@@ -13,7 +13,7 @@ import * as colorService from '../services/color-services';
 })
 export class AppComponent {
   @ViewChildren(ColorDivComponent) children!: QueryList<ColorDivComponent>;
-  @ViewChild('pallete') palleteDom!: ElementRef;
+  @ViewChild('palette') paletteDom!: ElementRef;
   title = 'color-picker';
   colors: Array<any>;
   colorsTemp!: Array<any>;
@@ -41,9 +41,11 @@ export class AppComponent {
   }
 
   refreshColors = () => {
-    this.children.forEach(colorDiv => {
+    this.children.forEach((colorDiv, indx) => {
       colorDiv.refreshColor();
+      this.colors[indx] = colorDiv.color;
     });
+    console.log(this.colors);
   }
 
   drop = (event: CdkDragDrop<string[]>) => {

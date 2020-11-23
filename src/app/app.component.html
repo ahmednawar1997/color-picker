@@ -2,16 +2,16 @@
 <div class="body-container mt-1">
   <div class="header-cont">
     <div class="header-item">
-      <h1 class="text-center">Color Pallete</h1>
+      <h1 class="text-center">Color Palette</h1>
     </div>
     <div class="header-item">
       <button class="button" (click)="refreshColors()">Refresh</button>
     </div>
   </div>
-  <div class="pallete-cont" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
+  <div class="palette-cont" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
     <app-color-div *ngFor="let color of colors" [color]="color" [canAddColors]="colors.length===7" cdkDrag
-      cdkDragLockAxis="x" (removeColor)="removeColor(color)" (addColor)="addColor(color)"
-      (expandColor)="expandColor(color)"></app-color-div>
+      cdkDragLockAxis="x" (expandColor)="expandColor(color)" (removeColor)="removeColor(color)" (addColor)="addColor(color)"
+      ></app-color-div>
 
   </div>
 </div>

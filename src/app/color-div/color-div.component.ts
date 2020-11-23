@@ -59,11 +59,11 @@ export class ColorDivComponent implements OnInit {
   }
 
   removeColorFromParent = () => {
-    this.removeColor.emit(this.color);
+    this.removeColor.emit();
   }
 
   addColorFromParent = () => {
-    this.addColor.emit(this.color);
+    this.addColor.emit();
   }
   setColor = (colorString: string) => {
     this.color = colorService.hexToRgb(colorString) || this.color;
@@ -72,7 +72,7 @@ export class ColorDivComponent implements OnInit {
   }
 
   expandColorFromParent = () => {
-    this.expandColor.emit(this.color);
+    this.expandColor.emit();
   }
 }
 
