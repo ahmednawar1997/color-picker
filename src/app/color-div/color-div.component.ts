@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import * as colorService from '../../services/color-services';
 
 @Component({
@@ -12,6 +12,11 @@ export class ColorDivComponent implements OnInit {
     green: number,
     blue: number
   };
+
+  @Input() canAddColors!: boolean;
+  @Output() removeColor: EventEmitter<any> = new EventEmitter();
+  @Output() addColor: EventEmitter<any> = new EventEmitter();
+
 
   colorRGB!: string;
   colorHex!: string;
@@ -45,8 +50,12 @@ export class ColorDivComponent implements OnInit {
     this.isLocked = !this.isLocked;
   }
 
-  removeColor = () => {
-    this.elementRef.nativeElement.remove();
+  removeColorFromParent = () => {
+    this.removeColor.emit(this.color);
+  }
+
+  addColorFromParent = () => {
+    this.addColor.emit(this.color);
   }
 
 }

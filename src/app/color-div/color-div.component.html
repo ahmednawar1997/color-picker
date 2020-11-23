@@ -1,11 +1,13 @@
 <div class="color-cont" [style.background-color]="colorRGB" [ngClass]="{lightTheme:!isDark, darkTheme:isDark}">
 
     <div class="buttons-cont">
-        <a class="color-button" (click)="removeColor()"><i class="fas fa-times fa-lg"></i></a>
+        <a class="color-button" (click)="removeColorFromParent()"><i class="fas fa-times fa-lg"></i></a>
         <a class="color-button" [ngClass]="{'locked':isLocked}" (click)="toggleLock()"><i class="fas fa-lg"
-                [ngClass]="{'fa-lock':isLocked, 'fa-lock-open':!isLocked}"></i></a>
+                [ngClass]="{'fa-lock':isLocked, 'fa-unlock':!isLocked}"></i></a>
         <a class="color-button" [cdkCopyToClipboard]="colorHex"><i class="fas fa-copy fa-lg"></i></a>
-        <a class="color-button" cdkDragHandle ><i class="fas fa-arrows-alt-h fa-lg"></i></a>
+        <a class="color-button"> <i class="fas fa-layer-group fa-lg"></i></a>
+        <button class="color-button addColorBtn" (click)="addColorFromParent()" [disabled]="canAddColors"><i class="fas fa-plus fa-lg"></i></button>
+
 
     </div>
 

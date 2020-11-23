@@ -21,6 +21,16 @@ export class AppComponent {
   }
 
 
+  removeColor = (color: any) => {
+    console.log(color);
+    this.colors = this.colors.filter((clr) => clr !== color);
+  }
+
+  addColor = (color: any) => {
+    const index = this.colors.indexOf(color);
+    this.colors.splice(index + 1, 0, colorService.pickRandomColor());
+  }
+
   refreshColors = () => {
     this.children.forEach(colorDiv => {
       colorDiv.refreshColor();
@@ -28,7 +38,6 @@ export class AppComponent {
   }
 
   drop = (event: CdkDragDrop<string[]>) => {
-    console.log('chnaged');
     moveItemInArray(this.colors, event.previousIndex, event.currentIndex);
   }
 

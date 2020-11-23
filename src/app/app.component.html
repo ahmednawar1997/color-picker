@@ -9,7 +9,8 @@
     </div>
   </div>
   <div class="pallete-cont" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
-  <app-color-div *ngFor="let color of colors" [color]="color" cdkDrag cdkDragLockAxis="x"></app-color-div>
+    <app-color-div *ngFor="let color of colors" [color]="color" [canAddColors]="colors.length===7" cdkDrag
+      cdkDragLockAxis="x" (removeColor)="removeColor(color)" (addColor)="addColor(color)"></app-color-div>
 
-</div>
+  </div>
 </div>

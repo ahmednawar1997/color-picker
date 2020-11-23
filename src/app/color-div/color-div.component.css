@@ -1,10 +1,10 @@
 :host {
   display: flex;
   flex: 1;
-
 }
 
 .color-cont {
+  position: relative;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -13,7 +13,9 @@
   height: 300px;
   padding: 30px;
   height: 100%;
-  transition: ease 0.3s;
+  transition: width .3s linear;
+  -webkit-transition: width 2s;
+  -moz-transition: width 2s;
 }
 
 .buttons-cont {
@@ -73,4 +75,16 @@ a {
 
 .lightTheme {
   color: black;
+}
+
+.addColorBtn {
+  background-color: #d2c9da;
+  position: absolute;
+  right: 0;
+  border-radius: 50%;
+  padding: 10px;
+  margin: -18px;
+  z-index: 2;
+  outline: none;
+  border: none;
 }

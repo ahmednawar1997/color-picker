@@ -2,6 +2,8 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  width: 100%;
 }
 
 .header-cont {
@@ -45,7 +47,6 @@
   flex: 3;
   height: 100%;
   display: flex;
+  /* flex-wrap: wrap; */
   flex-direction: row;
-  overflow: hidden;
-
 }
