@@ -1,4 +1,4 @@
-import { Component, QueryList, ViewChildren } from '@angular/core';
+import { Component, QueryList, ViewChildren, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { ColorDivComponent } from './color-div/color-div.component';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
@@ -13,8 +13,12 @@ import * as colorService from '../services/color-services';
 })
 export class AppComponent {
   @ViewChildren(ColorDivComponent) children!: QueryList<ColorDivComponent>;
+  @ViewChild('pallete') palleteDom!: ElementRef;
   title = 'color-picker';
   colors: Array<any>;
+  colorsTemp!: Array<any>;
+  showBackgroundLayer = false;
+  expandedColor = '#ffffff';
 
   constructor() {
     this.colors = colorService.generateColors(5);
@@ -29,6 +33,11 @@ export class AppComponent {
   addColor = (color: any) => {
     const index = this.colors.indexOf(color);
     this.colors.splice(index + 1, 0, colorService.pickRandomColor());
+  }
+  expandColor = (color: any) => {
+    this.expandedColor = colorService.rgbToHex(color);
+    this.showBackgroundLayer = true;
+
   }
 
   refreshColors = () => {

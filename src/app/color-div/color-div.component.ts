@@ -16,6 +16,8 @@ export class ColorDivComponent implements OnInit {
   @Input() canAddColors!: boolean;
   @Output() removeColor: EventEmitter<any> = new EventEmitter();
   @Output() addColor: EventEmitter<any> = new EventEmitter();
+  @Output() expandColor: EventEmitter<any> = new EventEmitter();
+
 
 
   colorRGB!: string;
@@ -67,6 +69,10 @@ export class ColorDivComponent implements OnInit {
     this.color = colorService.hexToRgb(colorString) || this.color;
     this.setupColor();
     this.toggleShades();
+  }
+
+  expandColorFromParent = () => {
+    this.expandColor.emit(this.color);
   }
 }
 
