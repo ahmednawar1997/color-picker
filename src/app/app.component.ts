@@ -45,7 +45,6 @@ export class AppComponent {
       colorDiv.refreshColor();
       this.colors[indx] = colorDiv.color;
     });
-    console.log(this.colors);
   }
 
   drop = (event: CdkDragDrop<string[]>) => {

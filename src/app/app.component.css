@@ -30,7 +30,7 @@
 .button {
   border: 1px solid #290c23;
   padding: 10px;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   background-color: #611953;
   color: white;
   transition: linear 0.5s;
