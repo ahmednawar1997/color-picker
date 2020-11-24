@@ -69,14 +69,60 @@ export const generateColors = (num: number) => {
 };
 
 export const generateShades = (color: any, num: number) => {
-    const shades: Array<any> = [];
-    for (let i = 0; i < num; i++) {
-        const newShade = {
-            red: Math.floor(color.red * ((i + 1) / num)),
-            green: Math.floor(color.green * ((i + 1) / num)),
-            blue: Math.floor(color.blue * ((i + 1) / num))
-        };
+    let shades: Array<any> = [];
+    const shadesDetails = getShadesNum(color, num);
+
+    let newShade = { ...color };
+
+    for (let i = 0; i < shadesDetails.lightShadesNum; i++) {
+        newShade = getshadeColor(newShade, 20);
         shades.push(rgbToHex(newShade));
+        console.log(newShade);
     }
+    newShade = { ...color };
+
+    const shadesTemp: Array<any> = [];
+    shadesTemp.push(rgbToHex(color));
+
+    for (let i = 0; i < shadesDetails.darkShadesNum - 1; i++) {
+        newShade = getshadeColor(newShade, -20);
+        console.log(newShade);
+        shadesTemp.push(rgbToHex(newShade));
+    }
+    shadesTemp.reverse();
+    shades = shadesTemp.concat(shades);
+
     return shades;
+};
+
+
+const getshadeColor = (color: any, percent: number) => {
+
+    const newShade = {
+        red: 0, green: 0, blue: 0
+    };
+
+    newShade.red = Math.floor(color.red * (100 + percent) / 100);
+    newShade.green = Math.floor(color.green * (100 + percent) / 100);
+    newShade.blue = Math.floor(color.blue * (100 + percent) / 100);
+
+    newShade.red = (newShade.red < 255) ? newShade.red : 255;
+    newShade.green = (newShade.green < 255) ? newShade.green : 255;
+    newShade.blue = (newShade.blue < 255) ? newShade.blue : 255;
+
+    return newShade;
+};
+
+const getShadesNum = (color: any, total: number) => {
+    const maxSubColor = Math.max.apply(null, Object.values(color));
+    const maxDiff = 255 - maxSubColor;
+
+    const minDiff = Math.min.apply(null, Object.values(color));
+
+    const lightShadesNum = Math.floor((maxDiff / (maxDiff + minDiff)) * total);
+    const darkShadesNum = total - lightShadesNum;
+
+
+    return { lightShadesNum, darkShadesNum };
+
 };

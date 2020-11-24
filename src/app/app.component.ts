@@ -51,5 +51,10 @@ export class AppComponent {
     moveItemInArray(this.colors, event.previousIndex, event.currentIndex);
   }
 
+  changeColorInArray = (oldColor: any, newColor: any) => {
+    const index = this.colors.indexOf(oldColor);
+    this.colors[index] = newColor;
+  }
+
 }
 

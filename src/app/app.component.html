@@ -10,7 +10,7 @@
   </div>
   <div class="palette-cont" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
     <app-color-div *ngFor="let color of colors" [color]="color" [canAddColors]="colors.length===7" cdkDrag
-      cdkDragLockAxis="x" (expandColor)="expandColor(color)" (removeColor)="removeColor(color)" (addColor)="addColor(color)"
+      cdkDragLockAxis="x" (expandColor)="expandColor(color)" (removeColor)="removeColor(color)" (addColor)="addColor(color)"(changeColor)="changeColorInArray(color, $event)"
       ></app-color-div>
 
   </div>

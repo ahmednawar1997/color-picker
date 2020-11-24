@@ -14,9 +14,11 @@ export class ColorDivComponent implements OnInit {
   };
 
   @Input() canAddColors!: boolean;
+
   @Output() removeColor: EventEmitter<any> = new EventEmitter();
   @Output() addColor: EventEmitter<any> = new EventEmitter();
   @Output() expandColor: EventEmitter<any> = new EventEmitter();
+  @Output() changeColor: EventEmitter<any> = new EventEmitter();
 
 
 
@@ -35,7 +37,6 @@ export class ColorDivComponent implements OnInit {
     this.setupColor();
   }
 
-
   refreshColor = () => {
     if (!this.isLocked) {
       this.color = colorService.pickRandomColor();
@@ -48,7 +49,7 @@ export class ColorDivComponent implements OnInit {
     this.colorRGB = colorService.generateRGBValue(this.color);
     this.colorHex = colorService.rgbToHex(this.color);
     this.isDark = colorService.isDark(this.color);
-    this.shades = colorService.generateShades(this.color, 20);
+    this.shades = colorService.generateShades(this.color, 12);
   }
 
   toggleLock = () => {
@@ -69,6 +70,7 @@ export class ColorDivComponent implements OnInit {
     this.color = colorService.hexToRgb(colorString) || this.color;
     this.setupColor();
     this.toggleShades();
+    this.changeColor.emit(this.color);
   }
 
   expandColorFromParent = () => {
