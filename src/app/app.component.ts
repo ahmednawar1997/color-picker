@@ -21,7 +21,7 @@ export class AppComponent {
   expandedColor = '#ffffff';
 
   constructor() {
-    this.colors = colorService.generateColors(5);
+    this.colors = colorService.generateSimilarColors(5);
   }
 
 
