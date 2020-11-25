@@ -1,4 +1,4 @@
-import { Component, QueryList, ViewChildren, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, QueryList, ViewChildren, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { ColorDivComponent } from './color-div/color-div.component';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
@@ -14,6 +14,7 @@ import * as colorService from '../services/color-services';
 export class AppComponent {
   @ViewChildren(ColorDivComponent) children!: QueryList<ColorDivComponent>;
   @ViewChild('palette') paletteDom!: ElementRef;
+
   colors: Array<any>;
   savedPalettes!: Array<any>;
   showSavedPalettes = false;
@@ -59,7 +60,7 @@ export class AppComponent {
 
   savePalette = () => {
     const newPalette = this.colors.map((color) => colorService.rgbToHex(color));
-    if (!isPaletteExist(this.savedPalettes, newPalette)) {
+    if (colorService.getSavedPalette(this.savedPalettes, newPalette) === -1) {
       this.savedPalettes.push(newPalette);
     }
   }
@@ -76,23 +77,22 @@ export class AppComponent {
       return colorService.hexToRgb(element);
     });
   }
-}
 
-const isPaletteExist = (savedPalettes: Array<any>, newPalette: Array<any>) => {
-  for (const palette of savedPalettes) {
-
-    if (palette.length !== newPalette.length) {
-      return false;
+  deleteSavedPalette = (savedPalette: Array<string>) => {
+    const index = colorService.getSavedPalette(this.savedPalettes, savedPalette);
+    if (index > -1) {
+      this.savedPalettes.splice(index, 1);
     }
-    let flag = true;
-    for (const [index, element] of palette.entries()) {
-      if (element !== newPalette[index]) {
-        flag = false;
-        break;
-      }
+    if (this.savedPalettes.length === 0) {
+      this.showSavedPalettes = false;
     }
-    if (flag) { return flag; }
   }
-  return false;
-};
+
+  @HostListener('document:keypress', ['$event'])
+  handleKeyboardEvent = (event: KeyboardEvent) => {
+    if (event.key === ' ') {
+      this.refreshColors();
+    }
+  }
+}
 

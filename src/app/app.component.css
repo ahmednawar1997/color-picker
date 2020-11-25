@@ -70,6 +70,7 @@
 
 .saved-palettes-btn {
   margin-right: auto;
+  padding-right: 2px !important;
 }
 
 .saved-palettes-btn:hover {
@@ -122,6 +123,7 @@
 
 .saved-palette {
   display: flex;
+  position: relative;
   flex-direction: row;
   flex-wrap: nowrap;
   padding: 0;
@@ -143,5 +145,18 @@
   padding: 5;
   margin-left: 10px;
   font-size: x-large;
-
 }
+
+.delete-saved-palette {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: -10px;
+  margin-top: -10px;
+  color: rgb(68, 68, 68);
+}
+.delete-saved-palette:hover {
+  color: rgb(34, 34, 34);
+  transform: scale(1.1);
+}
+

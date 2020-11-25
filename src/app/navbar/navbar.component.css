@@ -2,3 +2,15 @@
   /* background:rgb(253, 229, 253); */
   background-color: rgb(250, 250, 250);
 }
+
+.theme {
+  margin-left: auto;
+}
+
+#navbarNav ul {
+  width: 100%;
+}
+
+.textNavbar{
+  margin: auto;
+}

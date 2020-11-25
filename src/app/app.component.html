@@ -1,11 +1,8 @@
 <app-navbar></app-navbar>
 
-
-
 <div class="control-panel-cont">
-  <a class="control-btn saved-palettes-btn" mat-raised-button matTooltip="Saved Palettes: {{savedPalettes.length}}"
-    (click)="toggleSavedPalettes()"><i class="fas fa-swatchbook fa-2x"></i><span
-      class="saved-palletes-num"></span></a>
+  <a class="control-btn saved-palettes-btn" mat-raised-button matTooltip="Saved Palettes : {{savedPalettes.length}}"
+    (click)="toggleSavedPalettes()"><i class="fas fa-swatchbook fa-2x"></i><span class="saved-palletes-num"></span></a>
   <a class="control-btn refresh-btn" (click)="refreshColors()"><i class="fas fa-sync-alt fa-2x"></i></a>
   <a class="control-btn save-btn" mat-raised-button matTooltip="Save" (click)="savePalette()"><i
       class="far fa-bookmark fa-2x"></i></a>
@@ -15,7 +12,9 @@
 <div class="saved-palettes" *ngIf="showSavedPalettes">
   <div *ngFor="let palette of savedPalettes" class="saved-palette" (click)="choosePalette(palette)">
     <div *ngFor="let paletteColor of palette" class="palette-color" [style.background-color]="paletteColor"></div>
+    <a class="delete-saved-palette" (click)=deleteSavedPalette(palette)><i class="fas fa-times-circle"></i></a>
   </div>
+  
 </div>
 
 
@@ -28,4 +27,7 @@
 
   </div>
 </div>
-<app-background-layer [(isShown)]="showBackgroundLayer" [color]="expandedColor"></app-background-layer>
+
+
+<app-background-layer [(isShown)]="showBackgroundLayer" [color]="expandedColor">
+</app-background-layer>

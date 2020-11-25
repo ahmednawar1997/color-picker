@@ -107,6 +107,23 @@ export const generateShades = (color: any, num: number) => {
 
     return shades;
 };
+export const getSavedPalette = (savedPalettes: Array<any>, newPalette: Array<any>) => {
+    for (const [idx, palette] of savedPalettes.entries()) {
+
+        if (palette.length !== newPalette.length) {
+            return -1;
+        }
+        let flag = true;
+        for (const [index, element] of palette.entries()) {
+            if (element !== newPalette[index]) {
+                flag = false;
+                break;
+            }
+        }
+        if (flag) { return idx; }
+    }
+    return -1;
+};
 
 // https://github.com/antimatter15/rgb-lab/blob/master/color.js
 const deltaE = (color1: any, color: any) => {
@@ -181,9 +198,6 @@ const getShadesNum = (color: any, total: number) => {
     const lightShadesNum = Math.floor((maxDiff / (maxDiff + minDiff)) * total);
     // const darkShadesNum = total - lightShadesNum;
 
-    console.log(maxDiff);
-
-    console.log(lightShadesNum);
     // const darkRatio, lightRatio = Math.abs(maxSubColor - minDiff) > 200 ? 5 : 20;
     const lightRatio = maxSubColor > 220 ? 5 : 10;
     const darkRatio = minDiff < 30 ? 10 : 20;
