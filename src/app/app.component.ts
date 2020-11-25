@@ -1,4 +1,5 @@
 import { Component, QueryList, ViewChildren, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 import { ColorDivComponent } from './color-div/color-div.component';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
@@ -9,7 +10,31 @@ import * as colorService from '../services/color-services';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  animations: [
+    trigger(
+      'inOutAnimation',
+      [
+        transition(':enter', [
+          style({ opacity: 0 }),
+          animate('300ms ease-in', style({ opacity: 1 }))
+        ])
+      ]
+
+    ),
+    trigger(
+      'slideAnimation',
+      [
+        transition(':enter', [
+          style({ transform: 'translateY(-100%)' }),
+          animate('100ms ease-in', style({ transform: 'translateY(0)' }))
+        ]),
+        transition(':leave', [
+          animate('100ms ease-in', style({ transform: 'translateY(-100%)' }))
+        ])
+      ]
+    )
+  ]
 })
 export class AppComponent {
   @ViewChildren(ColorDivComponent) children!: QueryList<ColorDivComponent>;
