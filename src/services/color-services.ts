@@ -68,14 +68,14 @@ export const generateRandomColors = (num: number) => {
     return colors;
 };
 
-export const generateSimilarColors = (num: number) => {
+export const generateSimilarColors = (num: number, color?: any) => {
     const colors = [];
-    const color = pickRandomColor();
+    if (color === undefined) { color = pickRandomColor(); }
 
     let count = 0;
     while (count < num) {
         const randomColor = pickRandomColor();
-        if (colorSimilarity(randomColor, color) < 3) {
+        if (colorSimilarity(randomColor, color) < 2) {
             colors.push(randomColor);
             count++;
         }
@@ -89,19 +89,17 @@ export const generateShades = (color: any, num: number) => {
 
     let newShade = { ...color };
 
-    for (let i = 0; i < shadesDetails.lightShadesNum; i++) {
-        newShade = getshadeColor(newShade, 20);
+    for (let i = 0; i < shadesDetails.lightShadesNum - 1; i++) {
+        newShade = getshadeColor(newShade, shadesDetails.lightRatio);
         shades.push(rgbToHex(newShade));
-        console.log(newShade);
     }
     newShade = { ...color };
 
     const shadesTemp: Array<any> = [];
     shadesTemp.push(rgbToHex(color));
 
-    for (let i = 0; i < shadesDetails.darkShadesNum - 1; i++) {
-        newShade = getshadeColor(newShade, -20);
-        console.log(newShade);
+    for (let i = 0; i < shadesDetails.darkShadesNum; i++) {
+        newShade = getshadeColor(newShade, shadesDetails.darkRatio * -1);
         shadesTemp.push(rgbToHex(newShade));
     }
     shadesTemp.reverse();
@@ -135,9 +133,8 @@ const rgb2lab = (color: any) => {
     let r = color.red / 255;
     let g = color.green / 255;
     let b = color.blue / 255;
-    let x;
-    let y;
-    let z;
+    // tslint:disable-next-line: one-variable-per-declaration
+    let x, y, z;
     r = (r > 0.04045) ? Math.pow((r + 0.055) / 1.055, 2.4) : r / 12.92;
     g = (g > 0.04045) ? Math.pow((g + 0.055) / 1.055, 2.4) : g / 12.92;
     b = (b > 0.04045) ? Math.pow((b + 0.055) / 1.055, 2.4) : b / 12.92;
@@ -182,9 +179,17 @@ const getShadesNum = (color: any, total: number) => {
     const minDiff = Math.min.apply(null, Object.values(color));
 
     const lightShadesNum = Math.floor((maxDiff / (maxDiff + minDiff)) * total);
+    // const darkShadesNum = total - lightShadesNum;
+
+    console.log(maxDiff);
+
+    console.log(lightShadesNum);
+    // const darkRatio, lightRatio = Math.abs(maxSubColor - minDiff) > 200 ? 5 : 20;
+    const lightRatio = maxSubColor > 220 ? 5 : 10;
+    const darkRatio = minDiff < 30 ? 10 : 20;
+
     const darkShadesNum = total - lightShadesNum;
 
-
-    return { lightShadesNum, darkShadesNum };
+    return { lightShadesNum, darkShadesNum, lightRatio, darkRatio };
 };
 

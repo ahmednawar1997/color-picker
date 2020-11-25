@@ -22,6 +22,7 @@ export class ColorDivComponent implements OnInit {
 
 
 
+
   colorRGB!: string;
   colorHex!: string;
   colorDescription!: string;

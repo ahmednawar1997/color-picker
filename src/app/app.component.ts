@@ -14,19 +14,20 @@ import * as colorService from '../services/color-services';
 export class AppComponent {
   @ViewChildren(ColorDivComponent) children!: QueryList<ColorDivComponent>;
   @ViewChild('palette') paletteDom!: ElementRef;
-  title = 'color-picker';
   colors: Array<any>;
-  colorsTemp!: Array<any>;
+  savedPalettes!: Array<any>;
+  showSavedPalettes = false;
+
   showBackgroundLayer = false;
   expandedColor = '#ffffff';
 
   constructor() {
-    this.colors = colorService.generateSimilarColors(5);
+    this.colors = colorService.generateSimilarColors(4);
+    this.savedPalettes = [];
   }
 
 
   removeColor = (color: any) => {
-    console.log(color);
     this.colors = this.colors.filter((clr) => clr !== color);
   }
 
@@ -56,5 +57,36 @@ export class AppComponent {
     this.colors[index] = newColor;
   }
 
+  savePalette = () => {
+    const newPalette = this.colors.map((color) => colorService.rgbToHex(color));
+    if (!isPaletteExist(this.savedPalettes, newPalette)) {
+      this.savedPalettes.push(newPalette);
+    }
+  }
+
+  toggleSavedPalettes = () => {
+    this.showSavedPalettes = !this.showSavedPalettes;
+    if (this.savedPalettes.length === 0) {
+      this.showSavedPalettes = false;
+    }
+  }
 }
+
+const isPaletteExist = (savedPalettes: Array<any>, newPalette: Array<any>) => {
+  for (const palette of savedPalettes) {
+
+    if (palette.length !== newPalette.length) {
+      return false;
+    }
+    let flag = true;
+    for (const [index, element] of palette.entries()) {
+      if (element !== newPalette[index]) {
+        flag = false;
+        break;
+      }
+    }
+    if (flag) { return flag; }
+  }
+  return false;
+};
 
