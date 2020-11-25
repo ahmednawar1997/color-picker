@@ -1,3 +1,4 @@
+import { EventEmitter, Output } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  isDark: boolean;
+
+  @Output() changeTheme: EventEmitter<any> = new EventEmitter();
+
+  constructor() {
+    this.isDark = false;
+  }
 
   ngOnInit(): void {
+  }
+
+  toggleTheme = () => {
+    this.isDark = !this.isDark;
+    this.changeTheme.emit();
   }
 
 }

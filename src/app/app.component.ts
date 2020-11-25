@@ -18,6 +18,7 @@ export class AppComponent {
   colors: Array<any>;
   savedPalettes!: Array<any>;
   showSavedPalettes = false;
+  isDark = false;
 
   showBackgroundLayer = false;
   expandedColor = '#ffffff';
@@ -86,6 +87,10 @@ export class AppComponent {
     if (this.savedPalettes.length === 0) {
       this.showSavedPalettes = false;
     }
+  }
+
+  changeTheme = () => {
+    this.isDark = !this.isDark;
   }
 
   @HostListener('document:keypress', ['$event'])
