@@ -70,6 +70,12 @@ export class AppComponent {
       this.showSavedPalettes = false;
     }
   }
+
+  choosePalette = (palette: Array<string>) => {
+    this.colors = palette.map(element => {
+      return colorService.hexToRgb(element);
+    });
+  }
 }
 
 const isPaletteExist = (savedPalettes: Array<any>, newPalette: Array<any>) => {
