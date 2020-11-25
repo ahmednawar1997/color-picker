@@ -3,7 +3,7 @@ ntc.init();
 
 
 export const getColorDescription = (color: any) => {
-    return ntc.name(rgbToHex(color))[1];
+    return ntc.name(rgbToHex(color))[1].toString();
 };
 
 
