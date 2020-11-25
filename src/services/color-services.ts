@@ -1,10 +1,9 @@
+import { ntc } from '../services/color-name-service';
+ntc.init();
+
+
 export const getColorDescription = (color: any) => {
-    if (color.red >= color.green && color.red >= color.blue) { return 'redish'; }
-    if (color.green >= color.red && color.green >= color.blue) { return 'greenish'; }
-    if (color.blue >= color.green && color.blue >= color.red) { return 'blueish'; }
-
-    return 'blueish';
-
+    return ntc.name(rgbToHex(color))[1];
 };
 
 

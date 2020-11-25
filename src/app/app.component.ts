@@ -7,6 +7,7 @@ import * as colorService from '../services/color-services';
 
 
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,7 +18,7 @@ import * as colorService from '../services/color-services';
       [
         transition(':enter', [
           style({ opacity: 0 }),
-          animate('300ms ease-in', style({ opacity: 1 }))
+          animate('200ms ease-in', style({ opacity: 1 }))
         ])
       ]
 
