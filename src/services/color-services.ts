@@ -67,6 +67,8 @@ export const generateRandomColors = (num: number) => {
     return colors;
 };
 
+
+//  generate similar colors when locked
 export const generateSimilarColors = (num: number, color?: any) => {
     const colors = [];
     if (color === undefined) { color = pickRandomColor(); }

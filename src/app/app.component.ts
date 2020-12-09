@@ -1,5 +1,5 @@
 import { Component, QueryList, ViewChildren, ViewChild, ElementRef, HostListener } from '@angular/core';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { trigger, style, animate, transition } from '@angular/animations';
 import { ColorDivComponent } from './color-div/color-div.component';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
@@ -18,7 +18,7 @@ import * as colorService from '../services/color-services';
       [
         transition(':enter', [
           style({ opacity: 0 }),
-          animate('200ms ease-in', style({ opacity: 1 }))
+          animate('100ms ease-in', style({ opacity: 1 }))
         ])
       ]
 
